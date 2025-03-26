@@ -1,0 +1,11 @@
+{
+    "manifest_version": 3,
+    "name": "Eco-Friendly Shopping Assistant",
+    "version": "1.0",
+    "description": "Suggests sustainable alternatives while shopping online.",
+    "permissions": ["activeTab"],
+    "action": {
+      "default_popup": "popup.html"
+    }
+  }
+  
