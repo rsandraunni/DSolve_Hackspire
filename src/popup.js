@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
   
-      // Fake product alternatives for now (later, connect to a database)
       const alternatives = {
         "plastic bottle": ["Glass bottle", "Steel bottle"],
         "plastic bag": ["Cloth bag", "Paper bag"]
