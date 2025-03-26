@@ -3,7 +3,7 @@
     "name": "Eco-Friendly Shopping Assistant",
     "version": "1.0",
     "description": "Suggests sustainable alternatives while shopping online.",
-    "permissions": ["activeTab","scripting"],
+    "permissions": ["activeTab","scripting","storage"],
     "host_permissions": ["*://*.amazon.com/*"],
     "action":{
         "default_popup": "popup.html"
