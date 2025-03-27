@@ -1,22 +1,21 @@
 {
     "manifest_version": 3,
-    "name": "Eco-Friendly Shopping Assistant",
+    "name": "Eco Shopping Assistant",
     "version": "1.0",
-    "description": "Suggests sustainable alternatives while shopping online.",
+    "description": "Find sustainable alternatives while shopping online.",
     "permissions": ["activeTab", "scripting", "storage"],
-    "host_permissions": ["*://*.amazon.com/*"],
-    "action": {
-        "default_popup": "popup.html"
-    },
+    "host_permissions": ["https://www.amazon.in/*"],
     "background": {
-        "service_worker": "background.js",
-        "type": "module"
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html"
     },
     "content_scripts": [
-        {
-            "matches": ["*://*.amazon.com/*"],
-            "js": ["content.js"],
-            "run_at": "document_end"
-        }
+      {
+        "matches": ["https://www.amazon.in/*"],
+        "js": ["content.js"]
+      }
     ]
-}
+  }
+  
