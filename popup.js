@@ -1,25 +1,19 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const searchBtn = document.getElementById("searchBtn");
-  const productInput = document.getElementById("productName");
-  const resultDiv = document.getElementById("result");
+document.getElementById("searchBtn").addEventListener("click", function () {
+  let productName = document.getElementById("productName").value.trim();
 
-  searchBtn.addEventListener("click", function () {
-      const productName = productInput.value.trim().toLowerCase();
+  if (productName === "") {
+      document.getElementById("result").innerText = "Please enter a product name.";
+      return;
+  }
 
-      if (!productName) {
-          resultDiv.innerHTML = "<p>Please enter a product name.</p>";
-          return;
+  // Send message to background script to fetch alternatives
+  chrome.runtime.sendMessage({ action: "findAlternative", product: productName }, function (response) {
+      if (response && response.alternative) {
+          document.getElementById("result").innerHTML = 
+              `<strong>Alternative:</strong> ${response.alternative}`;
+      } else {
+          document.getElementById("result").innerText = "No alternatives found.";
       }
-
-      // Retrieve stored alternatives from Chrome Storage
-      chrome.storage.sync.get("alternatives", (data) => {
-          if (data.alternatives && data.alternatives[productName]) {
-              const alternativeList = data.alternatives[productName];
-              resultDiv.innerHTML = `<p>Alternatives: ${alternativeList.join(", ")}</p>`;
-          } else {
-              resultDiv.innerHTML = `<p>No alternatives found for "${productName}".</p>`;
-          }
-      });
   });
 });
-  
+
