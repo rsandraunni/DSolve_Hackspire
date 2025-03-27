@@ -1,19 +1,8 @@
-console.log("Eco Shopping Assistant content script loaded on Amazon!");
+// Check if running on an Amazon product page
+if (window.location.href.includes("/dp/")) {
+  let productTitle = document.querySelector("#productTitle")?.innerText.trim();
 
-function extractAmazonProductDetails() {
-  let productName = document.getElementById("productTitle,.B_NuCI")?.innerText.trim() || "";
-  let productPrice = document.querySelector(".a-price-whole")?.innerText.trim() || "";
-
-  if (productName) {
-    chrome.runtime.sendMessage({
-      action: "PRODUCT_INFO",
-      productName: productName,
-      productPrice: productPrice
-    });
+  if (productTitle) {
+      chrome.runtime.sendMessage({ action: "setProduct", product: productTitle });
   }
-}
-
-// Run extraction when the page loads
-if (window.location.hostname.includes("amazon.")) {
-  window.onload = extractAmazonProductDetails;
 }
